@@ -1,14 +1,21 @@
-import {Container} from './style';
+import {Container, Links} from './style';
+
+import {Header} from '../../components/Header'
 import {Button} from '../../components/Button'
+import {Section} from '../../components/Section'
 
 export function Details(){
   return(
     <Container>
-      <h1> Hello World!</h1>
-      <span> Thayna </span>
+      <Header/>
 
-      <Button title="Login" loading/>
-      <Button title="Cadastrar"/>
+      <Section title="Links Úteis"> 
+        <Links>
+          <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
+          <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
+        </Links>
+      </Section>
+
       <Button title="Voltar"/>
     </Container>
   )
