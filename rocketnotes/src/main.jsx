@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {ThemeProvider} from 'styled-components';
+import GlobalStyles from './styles/global';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import theme from './styles/theme';
+
+import {Details} from './pages/Details/';
+
+ReactDOM.createRoot(document.getElementById('root')).render( //selecionando a div e renderizando
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles/>
+      <Details/>
+    </ThemeProvider>
   </React.StrictMode>,
 )
