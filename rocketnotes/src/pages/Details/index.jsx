@@ -1,4 +1,4 @@
-import {Container, Links} from './style';
+import {Container, Links, Content} from './style';
 
 import {Header} from '../../components/Header'
 import {Button} from '../../components/Button'
@@ -11,21 +11,30 @@ export function Details(){
     <Container>
       <Header/>
 
-      <ButtonText title="Excluir nota" />
+      <main>
+        <Content>
+          <ButtonText title="Excluir nota" />
 
-      <Section title="Links Úteis"> 
-        <Links>
-          <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
-          <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
-        </Links>
-      </Section>
+          <h1>
+            Introdução ao React
+          </h1>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad voluptate impedit, vitae sapiente sunt vero recusandae quidem porro enim, labore animi dolorum repellat sit nisi error optio deleniti iusto dolore!</p>
 
-      <Section title="Marcadores">
-        <Tag title="express"/>
-        <Tag title="nodejs"/>
-      </Section>
+          <Section title="Links Úteis"> 
+            <Links>
+              <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
+              <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
+            </Links>
+          </Section>
 
-      <Button title="Voltar"/>
+          <Section title="Marcadores">
+            <Tag title="express"/>
+            <Tag title="nodejs"/>
+          </Section>
+
+          <Button title="Voltar"/>
+        </Content>
+      </main>
     </Container>
   )
 }
