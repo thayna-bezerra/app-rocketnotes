@@ -27,6 +27,13 @@ function AuthProvider({ children }) {
     }
   }
 
+  function signOut(){
+    localStorage.removeItem("@rocketnotes:user");
+    localStorage.removeItem("@rocketnotes:token");
+
+    setData({});
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("@rocketnotes:user");
     const token = localStorage.getItem("@rocketnotes:token");
@@ -39,11 +46,15 @@ function AuthProvider({ children }) {
         user: JSON.parse(user)
       });
     }
-    
+
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }}>
+    <AuthContext.Provider value={{ 
+      signIn, 
+      signOut,
+      user: data.user
+    }}>
       {children}
     </AuthContext.Provider>
   )
