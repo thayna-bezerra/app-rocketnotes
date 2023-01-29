@@ -1,40 +1,85 @@
+import { useState, useEffect } from 'react';
 import {Container, Links, Content} from './style';
+import { useParams, useNavigate } from 'react-router-dom';
+
+import { api } from '../../services/api'
 
 import {Header} from '../../components/Header'
 import {Button} from '../../components/Button'
 import {Section} from '../../components/Section'
 import {Tag} from '../../components/Tag'
 import {ButtonText} from '../../components/ButtonText'
+import { RiLinkM } from 'react-icons/ri';
 
 export function Details(){
+  const [data, setData] = useState(null);
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  function handleBack(){
+    navigate("/");
+  }
+
+  useEffect(() => {
+    async function fetchNote(){
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchNote();
+  }, []);
+
   return(
     <Container>
       <Header/>
+      {
+        data && 
+        <main>
+          <Content>
+            <ButtonText title="Excluir nota" />
 
-      <main>
-        <Content>
-          <ButtonText title="Excluir nota" />
+            <h1>
+              {data.title}
+            </h1>
+            <p>
+              {data.description}
+            </p>
 
-          <h1>
-            Introdução ao React
-          </h1>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad voluptate impedit, vitae sapiente sunt vero recusandae quidem porro enim, labore animi dolorum repellat sit nisi error optio deleniti iusto dolore!</p>
+            {
+              data.links && //so renderizo essa sessão se existir link para renderizar
+              <Section title="Links Úteis"> 
+                <Links>
+                  {
+                    data.links.map(link => (
+                      <li key={String(link.id)}> 
+                        <a href={link.url} target="_blank">
+                          {link.url}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </Links>
+              </Section>
+            }
 
-          <Section title="Links Úteis"> 
-            <Links>
-              <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
-              <li> <a href="https://www.linkedin.com/in/thayna-bezerra-a44a23181/" target="_blank">https://www.linkedin.com/in/thayna-bezerra/</a></li>
-            </Links>
-          </Section>
-
-          <Section title="Marcadores">
-            <Tag title="express"/>
-            <Tag title="nodejs"/>
-          </Section>
-
-          <Button title="Voltar"/>
-        </Content>
-      </main>
+            {
+              data.tags &&
+              <Section title="Marcadores">
+                {
+                  data.tags.map(tag => (
+                    <Tag 
+                      key={String(tag.id)}
+                      title={tag.name}
+                    />
+                  ))
+                }
+              </Section>
+            }
+            <Button title="Voltar" onClick={handleBack}/>
+          </Content>
+        </main>
+      }
     </Container>
   )
 }
